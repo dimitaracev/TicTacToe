@@ -1,0 +1,8 @@
+<div class="board">
+    <h2>Player turn: {{XOS.turn ? 'X' : 'O'}}</h2>
+    <ng-container *ngFor="let tile of XOS.board; index as i">
+        <app-tile (click)="tag(i)"[id]="i"></app-tile>
+        <br *ngIf="i % 3 == 2">
+    </ng-container>
+    <button class="btn" (click)="resetBoard()">Reset Board</button>
+</div>

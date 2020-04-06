@@ -1,0 +1,22 @@
+<div class="recentwinners">
+  <table>
+    <thead>
+      <tr>
+        <td><p>Game #</p></td>
+        <td><p>Player</p></td>
+      </tr>
+    </thead>
+    <tbody>
+      <ng-container *ngFor="let win of recentWins; index as i; even as e">
+        <tr [class.even]="e" [class.odd]="!e">
+          <td>
+            <p>{{ i + 1 }}</p>
+          </td>
+          <td>
+            <p>{{ XOS.players[win]["name"] }}</p>
+          </td>
+        </tr>
+      </ng-container>
+    </tbody>
+  </table>
+</div>
