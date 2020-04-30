@@ -28,6 +28,10 @@
     border: 10px solid coral;
 }
 
+.disabled {
+    pointer-events: none;
+}
+
 .winnerTile {
     border: 10px solid red;
 }

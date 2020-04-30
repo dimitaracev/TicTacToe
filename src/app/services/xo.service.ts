@@ -91,9 +91,8 @@ export class XOService {
       tiles.push(4);
       tiles.push(6);
     }
-    if(winner != -1)
-    {
-      let state = { id: 'showWinningTiles', data : tiles};
+    if (winner != -1) {
+      let state = { id: 'showWinningTiles', data: tiles };
       this.onStateChange.next(state);
     }
     return winner;
@@ -102,26 +101,40 @@ export class XOService {
   tag(i) {
     if (this.board[i]['state'] == -1) {
       this.board[i]['state'] = this.turn ? 1 : 0;
-      let state = {id:'tag', data: this.board[i]};
+      let state = { id: 'tag', data: this.board[i] };
       this.onStateChange.next(state);
       this.turn = !this.turn;
-      if(this.alreadyWon == 0){
-      let winner = this.checkForWinner();
-      setTimeout(() => {
+      if (this.alreadyWon == 0) {
+        let winner = this.checkForWinner();
         if (winner != -1) {
-          this.onWin.next(winner);
-          this.alreadyWon = 1;
-          this.resetBoard();
+          this.board.forEach((tile) => {
+            tile['state'] = -3;
+          });
         }
-      }, 1500);
+        setTimeout(() => {
+          if (winner != -1) {
+            this.onWin.next(winner);
+            this.alreadyWon = 1;
+            this.resetBoard();
+          }
+        }, 1000);
+      }
     }
+    let minus1s = 0;
+    this.board.forEach((tile) => {
+      if (tile['state'] == -1 || tile['state'] == -3) minus1s += 1;
+    });
+    if (minus1s == 0) {
+      setTimeout(() => {
+        this.resetBoard();
+      }, 1000);
     }
   }
   resetBoard() {
     for (let i = 0; i < this.board.length; i++) {
       this.board[i]['state'] = -1;
       this.onStateChange.next(this.board[i]);
-      let state = {id:'reset', data: i};
+      let state = { id: 'reset', data: i };
       this.onStateChange.next(state);
     }
     this.turn = false;
