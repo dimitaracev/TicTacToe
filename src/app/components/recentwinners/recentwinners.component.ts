@@ -6,7 +6,7 @@ import { XOService } from '../../services/xo.service';
   styleUrls: ['./recentwinners.component.css'],
 })
 export class RecentwinnersComponent implements OnInit {
-  public recentWins: Array<Number>;
+  public recentWins: Array<Object>;
   constructor(public XOS: XOService) {
     this.recentWins = new Array<Number>();
     XOS.onWin.subscribe((winner) => {

@@ -1,9 +1,10 @@
 nav {
     height: 80px;
     width: 100%;
-    background-color: coral;
+    background-color: #AEADF0;
     text-align: center;
     margin-bottom: 10px;
+    display: block;
 }
 
 nav p {

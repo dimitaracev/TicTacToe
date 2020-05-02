@@ -2,8 +2,9 @@
   <table>
     <thead>
       <tr>
-        <td><p>Game #</p></td>
+        <td><p>Game</p></td>
         <td><p>Player</p></td>
+        <td><p>Winning tile</p></td>
       </tr>
     </thead>
     <tbody>
@@ -13,7 +14,10 @@
             <p>{{ i + 1 }}</p>
           </td>
           <td>
-            <p>{{ XOS.players[win]["name"] }}</p>
+            <p>{{ XOS.players[win["player"]]["name"] }}</p>
+          </td>
+          <td>
+            {{win["tile"]}}
           </td>
         </tr>
       </ng-container>

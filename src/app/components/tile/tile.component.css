@@ -25,7 +25,7 @@
 }
 
 .basic {
-    border: 10px solid coral;
+    border: 5px solid #AEADF0;
 }
 
 .disabled {
@@ -33,5 +33,22 @@
 }
 
 .winnerTile {
-    border: 10px solid red;
+    border: 5px solid red;
+}
+
+@media screen and (max-width: 500px)
+{
+    .tile {
+        width: 64px;
+        height: 64px;
+    }
+    .O {
+        background-size: 64px;
+    }
+    .blank {
+        background-size: 64px;
+    }
+    .X {
+        background-size: 64px;
+    }
 }

@@ -9,7 +9,7 @@ export class XOService {
   public board: Array<Object>;
   public players: Array<Object>;
   public onStateChange: Subject<Object>;
-  public onWin: Subject<number>;
+  public onWin: Subject<Object>;
   private alreadyWon: number = 0;
   constructor() {
     this.players = [
@@ -25,7 +25,7 @@ export class XOService {
       },
     ];
     this.onStateChange = new Subject<Object>();
-    this.onWin = new Subject<number>();
+    this.onWin = new Subject<Object>();
     this.board = new Array<number>(9);
     for (let i = 0; i < 9; i++) {
       this.board[i] = { id: i, state: -1 };
@@ -113,7 +113,8 @@ export class XOService {
         }
         setTimeout(() => {
           if (winner != -1) {
-            this.onWin.next(winner);
+            let winnerPair = {'player': winner, 'tile': (!this.turn) ? "X" : "O"};
+            this.onWin.next(winnerPair);
             this.alreadyWon = 1;
             this.resetBoard();
           }

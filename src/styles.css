@@ -5,7 +5,7 @@
 }
 
 .btn {
-    background-color: coral;
+    background-color: #AEADF0;
     color: white;
     border: none;
     width: 320px;
@@ -26,4 +26,16 @@ p {
 
 .btn:hover{
     cursor: pointer;
+}
+
+@media screen and (max-width:500px)
+{
+    .btn {
+        width: 160px;
+        height: 32px;
+        font-size: 15px;
+    }
+    p {
+        font-size: 15px;
+    }
 }
