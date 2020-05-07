@@ -1,6 +1,6 @@
 <div class="leaderboard">
-  <p *ngFor="let player of XOS.players">
-    {{ player.name }} score: {{ player.score }}
+  <p *ngFor="let player of XOS.Players">
+    {{ player.Name }} score: {{ player.Score }}
   </p>
   <button class="btn" (click)="resetLeaderboard()">Reset Leaderboard</button>
 </div>

@@ -4,7 +4,7 @@ import {FormsModule} from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { XOService} from './services/xo.service';
-import { TileComponent } from './components/tile/tile.component';
+import { MarkComponent } from './components/mark/mark.component';
 import { BoardComponent } from './components/board/board.component';
 import { BarComponent } from './components/bar/bar.component';
 import { LeaderboardComponent } from './components/leaderboard/leaderboard.component';
@@ -14,7 +14,7 @@ import { PlayernamesComponent } from './components/playernames/playernames.compo
 @NgModule({
   declarations: [
     AppComponent,
-    TileComponent,
+    MarkComponent,
     BoardComponent,
     BarComponent,
     LeaderboardComponent,

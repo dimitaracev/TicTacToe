@@ -1,0 +1,7 @@
+<div class="mark" 
+[class.disabled]="Mark.State==-3"
+[class.blank]="Mark.State==-1" 
+[class.O]="Mark.State==0" 
+[class.X]="Mark.State==1" 
+[class.basic]="!Mark.IsWinnerMark" 
+[class.winnerMark]="Mark.IsWinnerMark"></div>

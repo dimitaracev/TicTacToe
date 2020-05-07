@@ -8,10 +8,6 @@ import { XOService } from '../../services/xo.service';
 export class RecentwinnersComponent implements OnInit {
   public recentWins: Array<Object>;
   constructor(public XOS: XOService) {
-    this.recentWins = new Array<Number>();
-    XOS.onWin.subscribe((winner) => {
-      this.recentWins.push(winner);
-    });
   }
 
   ngOnInit(): void {}

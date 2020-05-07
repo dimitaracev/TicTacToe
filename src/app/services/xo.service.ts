@@ -1,51 +1,42 @@
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Mark } from '../models/mark';
+import { Player } from '../models/player';
+import { Win } from '../models/win';
 
 @Injectable({
   providedIn: 'root',
 })
 export class XOService {
-  public turn: Boolean = false;
-  public board: Array<Object>;
-  public players: Array<Object>;
-  public onStateChange: Subject<Object>;
-  public onWin: Subject<Object>;
-  private alreadyWon: number = 0;
+  public Turn: Boolean = false;
+  public Players: Array<Player>;
+  public Marks: Array<Mark>;
+  public RecentWinners : Array<Win>;
   constructor() {
-    this.players = [
-      {
-        index: 0,
-        name: 'Player 1',
-        score: 0,
-      },
-      {
-        index: 1,
-        name: 'Player 2',
-        score: 0,
-      },
-    ];
-    this.onStateChange = new Subject<Object>();
-    this.onWin = new Subject<Object>();
-    this.board = new Array<number>(9);
+    this.Marks = new Array<Mark>();
+    this.Players = new Array<Player>();
+    this.RecentWinners = new Array<Win>();
+    this.Players.push(new Player('Player 1'));
+    this.Players.push(new Player('Player 2'));
     for (let i = 0; i < 9; i++) {
-      this.board[i] = { id: i, state: -1 };
+      this.Marks.push(new Mark(i));
     }
   }
   private checkForWinner(): number {
-    // Check vertical
+
     let winner = -1;
-    let tiles = [];
+    let marks = [];
+
+    // Check vertical
     for (let line = 0; line < 9; line += 3) {
       if (
-        this.board[line]['state'] == this.board[line + 1]['state'] &&
-        this.board[line + 1]['state'] == this.board[line + 2]['state'] &&
-        this.board[line]['state'] != -1
+        this.Marks[line].State == this.Marks[line + 1].State &&
+        this.Marks[line + 1].State == this.Marks[line + 2].State &&
+        this.Marks[line].State != -1
       ) {
-        this.players[this.board[line]['state']]['score']++;
-        winner = this.board[line]['state'];
-        tiles.push(line);
-        tiles.push(line + 1);
-        tiles.push(line + 2);
+        winner = this.Marks[line].State;
+        marks.push(line);
+        marks.push(line + 1);
+        marks.push(line + 2);
         break;
       }
     }
@@ -53,92 +44,77 @@ export class XOService {
     // Check horizontal
     for (let row = 0; row < 3; row += 1) {
       if (
-        this.board[row]['state'] == this.board[row + 3]['state'] &&
-        this.board[row + 3]['state'] == this.board[row + 6]['state'] &&
-        this.board[row]['state'] != -1
+        this.Marks[row].State == this.Marks[row + 3].State &&
+        this.Marks[row + 3].State == this.Marks[row + 6].State &&
+        this.Marks[row].State != -1
       ) {
-        this.players[this.board[row]['state']]['score']++;
-        winner = this.board[row]['state'];
-        tiles.push(row);
-        tiles.push(row + 3);
-        tiles.push(row + 6);
+        winner = this.Marks[row].State;
+        marks.push(row);
+        marks.push(row + 3);
+        marks.push(row + 6);
         break;
       }
     }
 
     // Check diagonal l
     if (
-      this.board[0]['state'] == this.board[4]['state'] &&
-      this.board[4]['state'] == this.board[8]['state'] &&
-      this.board[0]['state'] != -1
+      this.Marks[0].State == this.Marks[4].State &&
+      this.Marks[4].State == this.Marks[8].State &&
+      this.Marks[0].State != -1
     ) {
-      this.players[this.board[4]['state']]['score']++;
-      winner = this.board[4]['state'];
-      tiles.push(0);
-      tiles.push(4);
-      tiles.push(8);
+      winner = this.Marks[4].State;
+      marks.push(0);
+      marks.push(4);
+      marks.push(8);
     }
 
     // Check diagonal r
     if (
-      this.board[2]['state'] == this.board[4]['state'] &&
-      this.board[4]['state'] == this.board[6]['state'] &&
-      this.board[2]['state'] != -1
+      this.Marks[2].State == this.Marks[4].State &&
+      this.Marks[4].State == this.Marks[6].State &&
+      this.Marks[2].State != -1
     ) {
-      this.players[this.board[4]['state']]['score']++;
-      winner = this.board[4]['state'];
-      tiles.push(2);
-      tiles.push(4);
-      tiles.push(6);
+      winner = this.Marks[4].State;
+      marks.push(2);
+      marks.push(4);
+      marks.push(6);
     }
     if (winner != -1) {
-      let state = { id: 'showWinningTiles', data: tiles };
-      this.onStateChange.next(state);
-    }
-    return winner;
+      this.Marks[marks[0]].SetIsWinnerMark(true);
+      this.Marks[marks[1]].SetIsWinnerMark(true);
+      this.Marks[marks[2]].SetIsWinnerMark(true);
+      this.Players[winner].Score++;
+      return winner;
+    } else return undefined;
   }
 
-  tag(i) {
-    if (this.board[i]['state'] == -1) {
-      this.board[i]['state'] = this.turn ? 1 : 0;
-      let state = { id: 'tag', data: this.board[i] };
-      this.onStateChange.next(state);
-      this.turn = !this.turn;
-      if (this.alreadyWon == 0) {
-        let winner = this.checkForWinner();
-        if (winner != -1) {
-          this.board.forEach((tile) => {
-            tile['state'] = -3;
-          });
+  Click(i) {
+    if (this.Marks[i].State == -1) {
+      this.Marks[i].UpdateState(this.Turn ? 1 : 0);
+      this.Turn = !this.Turn;
+      let winner = this.checkForWinner();
+      setTimeout(() => {
+        if (winner != undefined) {
+          this.RecentWinners.push(new Win(this.Players[winner].Name,  !this.Turn ? 'X' : 'O'));
+          this.resetBoard();
         }
-        setTimeout(() => {
-          if (winner != -1) {
-            let winnerPair = {'player': winner, 'tile': (!this.turn) ? "X" : "O"};
-            this.onWin.next(winnerPair);
-            this.alreadyWon = 1;
-            this.resetBoard();
-          }
-        }, 1000);
-      }
+      }, 1000);
     }
-    let minus1s = 0;
-    this.board.forEach((tile) => {
-      if (tile['state'] == -1 || tile['state'] == -3) minus1s += 1;
+    let boardFilled = 0;
+    this.Marks.forEach((mark) => {
+      if (mark.State == -1 || mark.State == -3) boardFilled += 1;
     });
-    if (minus1s == 0) {
+    if (boardFilled == 0) {
       setTimeout(() => {
         this.resetBoard();
       }, 1000);
     }
   }
   resetBoard() {
-    for (let i = 0; i < this.board.length; i++) {
-      this.board[i]['state'] = -1;
-      this.onStateChange.next(this.board[i]);
-      let state = { id: 'reset', data: i };
-      this.onStateChange.next(state);
-    }
-    this.turn = false;
-    this.alreadyWon = 0;
+    this.Marks.forEach((mark) => {
+      mark.UpdateState(-1);
+      mark.SetIsWinnerMark(false);
+    });
+    this.Turn = false;
   }
 }

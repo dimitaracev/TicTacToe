@@ -11,7 +11,7 @@ export class LeaderboardComponent implements OnInit {
   ngOnInit(): void {}
 
   resetLeaderboard() {
-    this.XOS.players[0]['score'] = 0;
-    this.XOS.players[1]['score'] = 0;
+    this.XOS.Players[0].Score = 0;
+    this.XOS.Players[1].Score = 0;
   }
 }

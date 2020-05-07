@@ -4,20 +4,20 @@
       <tr>
         <td><p>Game</p></td>
         <td><p>Player</p></td>
-        <td><p>Winning tile</p></td>
+        <td><p>Mark</p></td>
       </tr>
     </thead>
     <tbody>
-      <ng-container *ngFor="let win of recentWins; index as i; even as e">
+      <ng-container *ngFor="let win of XOS.RecentWinners; index as i; even as e">
         <tr [class.even]="e" [class.odd]="!e">
           <td>
-            <p>{{ i + 1 }}</p>
+            {{ i + 1 }}
           </td>
           <td>
-            <p>{{ XOS.players[win["player"]]["name"] }}</p>
+            {{ win.Winner }}
           </td>
           <td>
-            {{win["tile"]}}
+            {{win.Side}}
           </td>
         </tr>
       </ng-container>

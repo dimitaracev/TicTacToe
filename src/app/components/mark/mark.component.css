@@ -1,11 +1,11 @@
-.tile {
+.mark {
     width: 128px;
     height: 128px;
     display: inline-block;
     margin-right: 5px;
 }
 
-.tile:hover {
+.mark:hover {
     cursor: pointer;
 }
 
@@ -32,13 +32,13 @@
     pointer-events: none;
 }
 
-.winnerTile {
+.winnerMark {
     border: 5px solid red;
 }
 
-@media screen and (max-width: 500px)
+@media screen and (max-width: 600px)
 {
-    .tile {
+    .mark {
         width: 64px;
         height: 64px;
     }

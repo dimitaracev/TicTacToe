@@ -9,11 +9,4 @@ export class BoardComponent implements OnInit {
   constructor(public XOS: XOService) {  }
 
   ngOnInit(): void {}
-
-  tag(i) {
-    this.XOS.tag(i);
-  }
-  resetBoard(){
-    this.XOS.resetBoard();
-  }
 }
