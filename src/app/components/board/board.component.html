@@ -1,7 +1,7 @@
 <div class="board">
-    <p>Player turn: {{XOS.Turn ? 'X' : 'O'}}</p>
+    <p *ngIf="XOS.Mode != undefined">{{XOS.Players[XOS.Turn ? 1 : 0].Name}} turn: {{XOS.Turn ? 'X' : 'O'}}</p>
     <ng-container *ngFor="let mark of XOS.Marks; index as i">
-        <app-mark (click)="XOS.Click(i)"[Mark]="mark"></app-mark>
+        <app-mark (click)="XOS.Move(i)"[Mark]="mark"></app-mark>
         <br *ngIf="i % 3 == 2">
     </ng-container>
     <button class="btn" (click)="XOS.resetBoard()">Reset Board</button>

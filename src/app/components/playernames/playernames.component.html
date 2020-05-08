@@ -1,5 +1,6 @@
 <div>
-    <p>Change player names</p>
-    <input type="text" name="Player1" id="Player1" [(ngModel)]="XOS.Players[0].Name">
-    <input type="text" name="Player2" id="Player2" [(ngModel)]="XOS.Players[1].Name">
+    <p>Change player name<span *ngIf="XOS.Mode == 0">s</span></p>
+    <ng-container *ngFor="let player of XOS.Players">
+        <input *ngIf="!player.IsComputer()" type="text" [(ngModel)]="player.Name">
+    </ng-container>
 </div>

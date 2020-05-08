@@ -10,6 +10,7 @@ import { BarComponent } from './components/bar/bar.component';
 import { LeaderboardComponent } from './components/leaderboard/leaderboard.component';
 import { RecentwinnersComponent } from './components/recentwinners/recentwinners.component';
 import { PlayernamesComponent } from './components/playernames/playernames.component';
+import { ChooseopponentComponent } from './components/chooseopponent/chooseopponent.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { PlayernamesComponent } from './components/playernames/playernames.compo
     BarComponent,
     LeaderboardComponent,
     RecentwinnersComponent,
-    PlayernamesComponent
+    PlayernamesComponent,
+    ChooseopponentComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,22 @@
+.model {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: teal;
+    z-index: 9999;
+    height: 775px;
+    text-align: center;
+    padding-top: 15%;
+    color: white;
+}
+
+.visible {
+    display: inline;
+}
+
+span {
+    display: inline-block;
+    width: 1%;
+}

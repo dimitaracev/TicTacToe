@@ -1,12 +1,21 @@
 div {
   display: block;
-  margin-left: auto;
-  margin-right: auto;
-  text-align: center;
+  margin-left: 5%;
+  margin-top: 15%;
+  position: absolute;
 }
 
 @media screen and (max-width: 600px) {
   input {
     width: 50%;
+  }
+}
+
+@media screen and (max-width: 1425px)
+{
+  div {
+    position: relative;
+    margin: 0 auto;
+    text-align: center;
   }
 }
