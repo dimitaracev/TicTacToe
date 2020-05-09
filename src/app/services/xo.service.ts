@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Mark } from '../models/mark';
 import { Player } from '../models/player';
+import { Computer } from '../models/computer';
 import { Win } from '../models/win';
 import { Mode } from '../enums/mode.enum';
 
@@ -91,7 +92,7 @@ export class XOService {
       });
       setTimeout(() => {
         this.RecentWinners.push(
-          new Win(this.Players[this.Turn ? 0 : 1].Name, this.Turn ? 'O' : 'X')
+          new Win(this.Players[this.Turn ? 0 : 1], this.Turn ? 'O' : 'X')
         );
         this.Players[this.Turn ? 0 : 1].Score++;
         this.resetBoard();
@@ -109,47 +110,46 @@ export class XOService {
         break;
       case Mode.AgainstComputer:
         this.Players.push(new Player('Player 1'));
-        this.Players.push(new Player('Computer'));
+        this.Players.push(new Computer());
         break;
       default:
         break;
     }
   }
-
+  
   ComputerMove() {
-    this.Marks.forEach(mark => {
+    this.Marks.forEach((mark) => {
       mark.SetDisabled();
-    })
+    });
     setTimeout(() => {
       let move = Math.round(Math.random() * 8);
-      while(this.Marks[move].State != -1 && this.CurrentGameMarks < 9)
-      {
+      while (this.Marks[move].State != -1 && this.CurrentGameMarks < 9) {
         move = Math.round(Math.random() * 8);
       }
       this.Marks[move].UpdateState(1);
-      this.Marks.forEach(mark => {
+      this.Marks.forEach((mark) => {
         mark.SetEnabled();
-      })
+      });
+      this.Turn = !this.Turn;
     }, 1000);
-    this.Turn = !this.Turn;
   }
 
   Move(markIndex) {
-    if(this.Marks[markIndex].State == -1)
-    {
+    if (this.Marks[markIndex].State == -1) {
       this.Marks[markIndex].UpdateState(this.Turn ? 1 : 0);
       this.Turn = !this.Turn;
-      if(!this.checkForWinner() && this.Turn && this.Mode == Mode.AgainstComputer)
-      {
+      if (
+        !this.checkForWinner() &&
+        this.Turn &&
+        this.Mode == Mode.AgainstComputer
+      ) {
         this.ComputerMove();
       }
     }
   }
   resetBoard() {
     this.Marks.forEach((mark) => {
-      mark.UpdateState(-1);
-      mark.SetIsWinnerMark(false);
-      mark.SetEnabled();
+      mark.Reset();
     });
     this.Turn = false;
   }

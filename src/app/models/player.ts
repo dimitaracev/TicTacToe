@@ -6,7 +6,8 @@ export class Player {
         this.Name = Name;
         this.Score = 0;
     }
+    
     IsComputer() : boolean {
-        return (this.Name == 'Computer');
+        return this.constructor.name === 'Computer';
     }
 }

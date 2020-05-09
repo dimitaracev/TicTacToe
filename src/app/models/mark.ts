@@ -30,5 +30,6 @@ export class Mark {
   Reset() {
       this.State = -1;
       this.IsWinnerMark = false;
+      this.Disabled = false;
   }
 }
