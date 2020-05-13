@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output } from '@angular/core';
 import {Mark} from '../../models/mark'
+import { EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-mark',
@@ -7,10 +8,16 @@ import {Mark} from '../../models/mark'
   styleUrls: ['./mark.component.css']
 })
 export class MarkComponent implements OnInit {
-  @Input()public Mark : Mark;
+  @Input() public Mark : Mark;
+  @Output() move : EventEmitter<boolean> = new EventEmitter<boolean>();
+
   constructor() {
   } 
 
+  Move()
+  {
+    this.move.emit(true);
+  }
   ngOnInit(): void {
   }
   

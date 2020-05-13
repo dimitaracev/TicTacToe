@@ -2,8 +2,12 @@ table {
   margin-left: auto;
   margin-right: auto;
   text-align: center;
-  width: 75%;
+  position: absolute;
+  right: 5%;
+  top: 10%;
+  width: 25%;
 }
+
 
 td {
   width: 2%;
@@ -25,9 +29,12 @@ td {
   color:white;
 }
 
-@media screen and (max-width:600px)
+@media screen and (max-width:1200px)
 {
   table {
+    top: 0%;
+    right: 0%;
+    position: relative;
     width: 75%;
   }
 }

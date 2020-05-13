@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import {XOService} from '../../services/xo.service';
 @Component({
-  selector: 'app-playernames',
-  templateUrl: './playernames.component.html',
-  styleUrls: ['./playernames.component.css']
+  selector: 'app-players',
+  templateUrl: './players.component.html',
+  styleUrls: ['./players.component.css']
 })
-export class PlayernamesComponent implements OnInit {
+export class PlayersComponent implements OnInit {
 
   
   constructor(public XOS : XOService) {

@@ -1,4 +1,4 @@
-<div class="recentwinners">
+<div class="winners">
   <table>
     <thead>
       <tr>
@@ -8,7 +8,7 @@
       </tr>
     </thead>
     <tbody>
-      <ng-container *ngFor="let win of XOS.RecentWinners; index as i; even as e">
+      <ng-container *ngFor="let win of recentWins; index as i; even as e">
         <tr [class.even]="e" [class.odd]="!e">
           <td>
             {{ i + 1 }}

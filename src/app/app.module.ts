@@ -8,9 +8,9 @@ import { MarkComponent } from './components/mark/mark.component';
 import { BoardComponent } from './components/board/board.component';
 import { BarComponent } from './components/bar/bar.component';
 import { LeaderboardComponent } from './components/leaderboard/leaderboard.component';
-import { RecentwinnersComponent } from './components/recentwinners/recentwinners.component';
-import { PlayernamesComponent } from './components/playernames/playernames.component';
-import { ChooseopponentComponent } from './components/chooseopponent/chooseopponent.component';
+import { WinnersComponent } from './components/winners/winners.component';
+import { PlayersComponent } from './components/players/players.component';
+import { OpponentComponent } from './components/opponent/opponent.component';
 
 @NgModule({
   declarations: [
@@ -19,9 +19,9 @@ import { ChooseopponentComponent } from './components/chooseopponent/chooseoppon
     BoardComponent,
     BarComponent,
     LeaderboardComponent,
-    RecentwinnersComponent,
-    PlayernamesComponent,
-    ChooseopponentComponent
+    WinnersComponent,
+    PlayersComponent,
+    OpponentComponent
   ],
   imports: [
     BrowserModule,
